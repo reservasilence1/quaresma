@@ -221,8 +221,221 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <meta name="generator" content="WordPress 6.9.1">
 <link rel="canonical" href="https://suaeditoracatolica.site/itinerario-quaresmal-2026/">
 <link rel="shortlink" href="https://suaeditoracatolica.site/?p=7430">
+<script>document.createElement( "picture" );if(!window.HTMLPictureElement && document.addEventListener) {window.addEventListener("DOMContentLoaded", function() {var s = document.createElement("script");s.src = "https://suaeditoracatolica.site/wp-content/plugins/webp-express/js/picturefill.min.js";document.body.appendChild(s);});}</script><script id="wpcp_disable_selection" type="text/javascript">
+var image_save_msg='You are not allowed to save images!';
+	var no_menu_msg='Context Menu disabled!';
+	var smessage = "";
 
+function disableEnterKey(e)
+{
+	var elemtype = e.target.tagName;
 	
+	elemtype = elemtype.toUpperCase();
+	
+	if (elemtype == "TEXT" || elemtype == "TEXTAREA" || elemtype == "INPUT" || elemtype == "PASSWORD" || elemtype == "SELECT" || elemtype == "OPTION" || elemtype == "EMBED")
+	{
+		elemtype = 'TEXT';
+	}
+	
+	if (e.ctrlKey){
+     var key;
+     if(window.event)
+          key = window.event.keyCode;     //IE
+     else
+          key = e.which;     //firefox (97)
+    //if (key != 17) alert(key);
+     if (elemtype!= 'TEXT' && (key == 97 || key == 65 || key == 67 || key == 99 || key == 88 || key == 120 || key == 26 || key == 85  || key == 86 || key == 83 || key == 43 || key == 73))
+     {
+		if(wccp_free_iscontenteditable(e)) return true;
+		show_wpcp_message('You are not allowed to copy content or view source');
+		return false;
+     }else
+     	return true;
+     }
+}
+
+
+/*For contenteditable tags*/
+function wccp_free_iscontenteditable(e)
+{
+	var e = e || window.event; // also there is no e.target property in IE. instead IE uses window.event.srcElement
+  	
+	var target = e.target || e.srcElement;
+
+	var elemtype = e.target.nodeName;
+	
+	elemtype = elemtype.toUpperCase();
+	
+	var iscontenteditable = "false";
+		
+	if(typeof target.getAttribute!="undefined" ) iscontenteditable = target.getAttribute("contenteditable"); // Return true or false as string
+	
+	var iscontenteditable2 = false;
+	
+	if(typeof target.isContentEditable!="undefined" ) iscontenteditable2 = target.isContentEditable; // Return true or false as boolean
+
+	if(target.parentElement.isContentEditable) iscontenteditable2 = true;
+	
+	if (iscontenteditable == "true" || iscontenteditable2 == true)
+	{
+		if(typeof target.style!="undefined" ) target.style.cursor = "text";
+		
+		return true;
+	}
+}
+
+////////////////////////////////////
+function disable_copy(e)
+{	
+	var e = e || window.event; // also there is no e.target property in IE. instead IE uses window.event.srcElement
+	
+	var elemtype = e.target.tagName;
+	
+	elemtype = elemtype.toUpperCase();
+	
+	if (elemtype == "TEXT" || elemtype == "TEXTAREA" || elemtype == "INPUT" || elemtype == "PASSWORD" || elemtype == "SELECT" || elemtype == "OPTION" || elemtype == "EMBED")
+	{
+		elemtype = 'TEXT';
+	}
+	
+	if(wccp_free_iscontenteditable(e)) return true;
+	
+	var isSafari = /Safari/.test(navigator.userAgent) && /Apple Computer/.test(navigator.vendor);
+	
+	var checker_IMG = '';
+	if (elemtype == "IMG" && checker_IMG == 'checked' && e.detail >= 2) {show_wpcp_message(alertMsg_IMG);return false;}
+	if (elemtype != "TEXT")
+	{
+		if (smessage !== "" && e.detail == 2)
+			show_wpcp_message(smessage);
+		
+		if (isSafari)
+			return true;
+		else
+			return false;
+	}	
+}
+
+//////////////////////////////////////////
+function disable_copy_ie()
+{
+	var e = e || window.event;
+	var elemtype = window.event.srcElement.nodeName;
+	elemtype = elemtype.toUpperCase();
+	if(wccp_free_iscontenteditable(e)) return true;
+	if (elemtype == "IMG") {show_wpcp_message(alertMsg_IMG);return false;}
+	if (elemtype != "TEXT" && elemtype != "TEXTAREA" && elemtype != "INPUT" && elemtype != "PASSWORD" && elemtype != "SELECT" && elemtype != "OPTION" && elemtype != "EMBED")
+	{
+		return false;
+	}
+}	
+function reEnable()
+{
+	return true;
+}
+document.onkeydown = disableEnterKey;
+document.onselectstart = disable_copy_ie;
+if(navigator.userAgent.indexOf('MSIE')==-1)
+{
+	document.onmousedown = disable_copy;
+	document.onclick = reEnable;
+}
+function disableSelection(target)
+{
+    //For IE This code will work
+    if (typeof target.onselectstart!="undefined")
+    target.onselectstart = disable_copy_ie;
+    
+    //For Firefox This code will work
+    else if (typeof target.style.MozUserSelect!="undefined")
+    {target.style.MozUserSelect="none";}
+    
+    //All other  (ie: Opera) This code will work
+    else
+    target.onmousedown=function(){return false}
+    target.style.cursor = "default";
+}
+//Calling the JS function directly just after body load
+window.onload = function(){disableSelection(document.body);};
+
+//////////////////special for safari Start////////////////
+var onlongtouch;
+var timer;
+var touchduration = 1000; //length of time we want the user to touch before we do something
+
+var elemtype = "";
+function touchstart(e) {
+	var e = e || window.event;
+  // also there is no e.target property in IE.
+  // instead IE uses window.event.srcElement
+  	var target = e.target || e.srcElement;
+	
+	elemtype = window.event.srcElement.nodeName;
+	
+	elemtype = elemtype.toUpperCase();
+	
+	if(!wccp_pro_is_passive()) e.preventDefault();
+	if (!timer) {
+		timer = setTimeout(onlongtouch, touchduration);
+	}
+}
+
+function touchend() {
+    //stops short touches from firing the event
+    if (timer) {
+        clearTimeout(timer);
+        timer = null;
+    }
+	onlongtouch();
+}
+
+onlongtouch = function(e) { //this will clear the current selection if anything selected
+	
+	if (elemtype != "TEXT" && elemtype != "TEXTAREA" && elemtype != "INPUT" && elemtype != "PASSWORD" && elemtype != "SELECT" && elemtype != "EMBED" && elemtype != "OPTION")	
+	{
+		if (window.getSelection) {
+			if (window.getSelection().empty) {  // Chrome
+			window.getSelection().empty();
+			} else if (window.getSelection().removeAllRanges) {  // Firefox
+			window.getSelection().removeAllRanges();
+			}
+		} else if (document.selection) {  // IE?
+			document.selection.empty();
+		}
+		return false;
+	}
+};
+
+document.addEventListener("DOMContentLoaded", function(event) { 
+    window.addEventListener("touchstart", touchstart, false);
+    window.addEventListener("touchend", touchend, false);
+});
+
+function wccp_pro_is_passive() {
+
+  var cold = false,
+  hike = function() {};
+
+  try {
+	  const object1 = {};
+  var aid = Object.defineProperty(object1, 'passive', {
+  get() {cold = true}
+  });
+  window.addEventListener('test', hike, aid);
+  window.removeEventListener('test', hike, aid);
+  } catch (e) {}
+
+  return cold;
+}
+/*special for safari End*/
+</script>
+<script id="wpcp_disable_Right_Click" type="text/javascript">
+document.ondragstart = function() { return false;}
+	function nocontext(e) {
+	   return false;
+	}
+	document.oncontextmenu = nocontext;
+</script>
 <meta name="generator" content="Elementor 3.35.3; features: e_font_icon_svg, additional_custom_breakpoints; settings: css_print_method-external, google_font-enabled, font_display-swap">
 <script type="text/javascript">
     (function(c,l,a,r,i,t,y){
@@ -278,7 +491,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div class="elementor-widget-container">
 									<p><span style="font-weight: 400;">Com o Diário do Itinerário Quaresmal 2026, você sabe exatamente o que rezar e viver em cada dia da Quaresma, do início até a Páscoa.</span></p>								</div>
 				</div>
-				<div class="elementor-element elementor-element-5b1600f1 e-transform elementor-widget elementor-widget-button" data-id="5b1600f1" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
+				<div class="elementor-element elementor-element-5b1600f1 e-transform elementor-invisible elementor-widget elementor-widget-button" data-id="5b1600f1" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
 					<a class="elementor-button elementor-button-link elementor-size-sm" href="#oferta">
@@ -339,116 +552,19 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div class="elementor-widget-container">
 					<h2 class="elementor-heading-title elementor-size-default">Veja uma pequena amostra do material que você vai receber:</h2>				</div>
 				</div>
-
-
-
-
-
-
-
-<div class="elementor-element elementor-element-ad6169b e-con-full e-flex e-con e-child"
-     data-id="ad6169b"
-     data-element_type="container"
-     data-e-type="container">
-
-  <div class="elementor-element elementor-element-163de53 elementor-widget__width-inherit elementor-widget elementor-widget-image-carousel"
-       data-id="163de53"
-       data-element_type="widget"
-       data-e-type="widget"
-       data-settings='{"slides_to_show":"4","lazyload":"yes","autoplay_speed":0,"speed":7000,"slides_to_show_mobile":"1","slides_to_show_tablet":"3","navigation":"none","autoplay":"yes","infinite":"yes","image_spacing_custom":{"unit":"px","size":20,"sizes":[]},"image_spacing_custom_tablet":{"unit":"px","size":"","sizes":[]}}'
-       data-widget_type="image-carousel.default">
-
-    <div class="elementor-widget-container">
-
-      <div class="elementor-image-carousel-wrapper swiper"
-           role="region"
-           aria-roledescription="carousel"
-           aria-label="Carrossel de imagens"
-           dir="rtl">
-
-        <div class="elementor-image-carousel swiper-wrapper" aria-live="off">
-
-          <div class="swiper-slide" role="group" aria-label="1 de 6">
-            <figure class="swiper-slide-inner">
-              <img class="swiper-slide-image swiper-lazy"
-                   data-src="/images/01.jpg"
-                   src="/images/01.jpg"
-                   alt="Imagem 1">
-              <div class="swiper-lazy-preloader"></div>
-            </figure>
-          </div>
-
-          <div class="swiper-slide" role="group" aria-label="2 de 6">
-            <figure class="swiper-slide-inner">
-              <img class="swiper-slide-image swiper-lazy"
-                   data-src="/images/02.jpg"
-                   src="/images/02.jpg"
-                   alt="Imagem 2">
-              <div class="swiper-lazy-preloader"></div>
-            </figure>
-          </div>
-
-          <div class="swiper-slide" role="group" aria-label="3 de 6">
-            <figure class="swiper-slide-inner">
-              <img class="swiper-slide-image swiper-lazy"
-                   data-src="/images/03.jpg"
-                   src="/images/03.jpg"
-                   alt="Imagem 3">
-              <div class="swiper-lazy-preloader"></div>
-            </figure>
-          </div>
-
-          <div class="swiper-slide" role="group" aria-label="4 de 6">
-            <figure class="swiper-slide-inner">
-              <img class="swiper-slide-image swiper-lazy"
-                   data-src="/images/04.jpg"
-                   src="/images/04.jpg"
-                   alt="Imagem 4">
-              <div class="swiper-lazy-preloader"></div>
-            </figure>
-          </div>
-
-          <div class="swiper-slide" role="group" aria-label="5 de 6">
-            <figure class="swiper-slide-inner">
-              <img class="swiper-slide-image swiper-lazy"
-                   data-src="/images/05.jpg"
-                   src="/images/05.jpg"
-                   alt="Imagem 5">
-              <div class="swiper-lazy-preloader"></div>
-            </figure>
-          </div>
-
-          <div class="swiper-slide" role="group" aria-label="6 de 6">
-            <figure class="swiper-slide-inner">
-              <img class="swiper-slide-image swiper-lazy"
-                   data-src="/images/06.jpg"
-                   src="/images/06.jpg"
-                   alt="Imagem 6">
-              <div class="swiper-lazy-preloader"></div>
-            </figure>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-						
-
-
-
-
-
-
-
-
-
-
-						
-
-				
+		<div class="elementor-element elementor-element-ad6169b e-con-full e-flex e-con e-child" data-id="ad6169b" data-element_type="container" data-e-type="container">
+				<div class="elementor-element elementor-element-163de53 elementor-widget__width-inherit elementor-widget elementor-widget-image-carousel" data-id="163de53" data-element_type="widget" data-e-type="widget" data-settings="{" slides_to_show":"4","lazyload":"yes","autoplay_speed":0,"speed":7000,"slides_to_show_mobile":"1","slides_to_show_tablet":"3","navigation":"none","autoplay":"yes","infinite":"yes","image_spacing_custom":{"unit":"px","size":20,"sizes":[]},"image_spacing_custom_tablet":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="image-carousel.default">
+				<div class="elementor-widget-container">
+							<div class="elementor-image-carousel-wrapper swiper" role="region" aria-roledescription="carousel" aria-label="Carrossel de imagens" dir="rtl">
+			<div class="elementor-image-carousel swiper-wrapper" aria-live="off">
+								<div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="1 de 6"><figure class="swiper-slide-inner"><img class="swiper-slide-image swiper-lazy" data-src="https://suaeditoracatolica.site/wp-content/uploads/2026/01/6.jpg" alt="6"><div class="swiper-lazy-preloader"></div></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="2 de 6"><figure class="swiper-slide-inner"><img class="swiper-slide-image swiper-lazy" data-src="https://suaeditoracatolica.site/wp-content/uploads/2026/01/7.jpg" alt="7"><div class="swiper-lazy-preloader"></div></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="3 de 6"><figure class="swiper-slide-inner"><img class="swiper-slide-image swiper-lazy" data-src="https://suaeditoracatolica.site/wp-content/uploads/2026/01/13.jpg" alt="13"><div class="swiper-lazy-preloader"></div></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="4 de 6"><figure class="swiper-slide-inner"><img class="swiper-slide-image swiper-lazy" data-src="https://suaeditoracatolica.site/wp-content/uploads/2026/01/18.jpg" alt="18"><div class="swiper-lazy-preloader"></div></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="5 de 6"><figure class="swiper-slide-inner"><img class="swiper-slide-image swiper-lazy" data-src="https://suaeditoracatolica.site/wp-content/uploads/2026/01/19.jpg" alt="19"><div class="swiper-lazy-preloader"></div></figure></div><div class="swiper-slide" role="group" aria-roledescription="slide" aria-label="6 de 6"><figure class="swiper-slide-inner"><img class="swiper-slide-image swiper-lazy" data-src="https://suaeditoracatolica.site/wp-content/uploads/2026/01/20.jpg" alt="20"><div class="swiper-lazy-preloader"></div></figure></div>			</div>
+							
+									</div>
+						</div>
+				</div>
+				</div>
+					</div>
+				</div>
 		<div class="elementor-element elementor-element-157fb85 e-flex e-con-boxed e-con e-parent" data-id="157fb85" data-element_type="container" data-e-type="container" data-settings="{" background_background":"classic"}"="">
 					<div class="e-con-inner">
 				<div class="elementor-element elementor-element-f043ae9 elementor-widget__width-initial elementor-widget elementor-widget-heading" data-id="f043ae9" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
@@ -527,7 +643,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div class="elementor-widget-container">
 									<p>Nosso material irá te ajudar a viver a Quaresma com mais sentido, constância e paz.</p>								</div>
 				</div>
-				<div class="elementor-element elementor-element-d92b595 e-transform elementor-widget elementor-widget-button" data-id="d92b595" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
+				<div class="elementor-element elementor-element-d92b595 e-transform elementor-invisible elementor-widget elementor-widget-button" data-id="d92b595" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
 					<a class="elementor-button elementor-button-link elementor-size-sm" href="#oferta">
@@ -569,7 +685,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div class="elementor-widget-container">
 					<h2 class="elementor-heading-title elementor-size-default">Ainda hoje, você garante um caminho claro para viver toda a Quaresma.</h2>				</div>
 				</div>
-				<div class="elementor-element elementor-element-5925016 e-transform elementor-widget elementor-widget-button" data-id="5925016" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
+				<div class="elementor-element elementor-element-5925016 e-transform elementor-invisible elementor-widget elementor-widget-button" data-id="5925016" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
 					<a class="elementor-button elementor-button-link elementor-size-sm" href="#oferta">
@@ -617,7 +733,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				</div>
 		<div class="elementor-element elementor-element-82c8884 e-flex e-con-boxed e-con e-parent" data-id="82c8884" data-element_type="container" data-e-type="container" data-settings="{" background_background":"classic"}"="">
 					<div class="e-con-inner">
-				<div class="elementor-element elementor-element-0f3fcc6 e-transform elementor-widget elementor-widget-button" data-id="0f3fcc6" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
+				<div class="elementor-element elementor-element-0f3fcc6 e-transform elementor-invisible elementor-widget elementor-widget-button" data-id="0f3fcc6" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
 					<a class="elementor-button elementor-button-link elementor-size-sm" href="#oferta">
@@ -688,7 +804,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div class="elementor-widget-container">
 					<h2 class="elementor-heading-title elementor-size-default">E MUITO MAIS...</h2>				</div>
 				</div>
-				<div class="elementor-element elementor-element-68e796e e-transform elementor-widget elementor-widget-button" data-id="68e796e" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
+				<div class="elementor-element elementor-element-68e796e e-transform elementor-invisible elementor-widget elementor-widget-button" data-id="68e796e" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
 					<a class="elementor-button elementor-button-link elementor-size-sm" href="#oferta">
@@ -1035,7 +1151,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 						</ul>
 						</div>
 				</div>
-				<div class="elementor-element elementor-element-3d196822 e-transform elementor-widget elementor-widget-button" data-id="3d196822" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
+				<div class="elementor-element elementor-element-3d196822 e-transform elementor-invisible elementor-widget elementor-widget-button" data-id="3d196822" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
 					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://checkout.doppus.app/74351436">
@@ -1152,7 +1268,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div class="elementor-widget-container">
 									<p>Ou 3x de R$ 6,19 no cartão</p>								</div>
 				</div>
-				<div class="elementor-element elementor-element-927f752 e-transform elementor-widget elementor-widget-button" data-id="927f752" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
+				<div class="elementor-element elementor-element-927f752 e-transform elementor-invisible elementor-widget elementor-widget-button" data-id="927f752" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
 					<a class="elementor-button elementor-button-link elementor-size-sm" href="https://checkout.doppus.app/63361660">
@@ -1246,7 +1362,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 <p data-start="976" data-end="1109"><img decoding="async" class="emoji" role="img" draggable="false" src="images/2705.svg" alt="✅">�Compra 100% segura<br data-start="997" data-end="1000"><img decoding="async" class="emoji" role="img" draggable="false" src="images/2705.svg" alt="✅">�Conteúdo fiel e aprovado por quem já usa<br data-start="1043" data-end="1046"><img decoding="async" class="emoji" role="img" draggable="false" src="images/2705.svg" alt="✅"> Ideal para a Quaresma</p>
 <p data-start="1111" data-end="1159"><img decoding="async" class="emoji" role="img" draggable="false" src="images/1f4e9.svg" alt="📩">�<strong data-start="1114" data-end="1159">Clique abaixo e garanta seu acesso agora!</strong></p>								</div>
 				</div>
-				<div class="elementor-element elementor-element-0e294d4 e-transform elementor-widget elementor-widget-button" data-id="0e294d4" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
+				<div class="elementor-element elementor-element-0e294d4 e-transform elementor-invisible elementor-widget elementor-widget-button" data-id="0e294d4" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
 					<a class="elementor-button elementor-button-link elementor-size-sm" href="#oferta">
@@ -1418,7 +1534,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div class="elementor-widget-container">
 									<p><strong>Pronto para viver a Quaresma com mais profundidade?</strong></p><p>Siga um itinerário claro para saber o que rezar e viver em cada dia. 👇</p>								</div>
 				</div>
-				<div class="elementor-element elementor-element-86734e6 e-transform elementor-widget elementor-widget-button" data-id="86734e6" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
+				<div class="elementor-element elementor-element-86734e6 e-transform elementor-invisible elementor-widget elementor-widget-button" data-id="86734e6" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
 					<a class="elementor-button elementor-button-link elementor-size-sm" href="#oferta">
@@ -1599,7 +1715,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 				<div class="elementor-widget-container">
 									<p><strong>Tirou suas dúvidas?</strong> Agora é só garantir o seu material!</p><p>Clique no botão abaixo 👇</p>								</div>
 				</div>
-				<div class="elementor-element elementor-element-e6b6947 e-transform elementor-align-center elementor-widget elementor-widget-button" data-id="e6b6947" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
+				<div class="elementor-element elementor-element-e6b6947 e-transform elementor-align-center elementor-invisible elementor-widget elementor-widget-button" data-id="e6b6947" data-element_type="widget" data-e-type="widget" data-settings="{" _animation":"pulse","_transform_scale_effect_hover":{"unit":"px","size":1.05,"sizes":[]},"_transform_scale_effect_hover_tablet":{"unit":"px","size":"","sizes":[]},"_transform_scale_effect_hover_mobile":{"unit":"px","size":"","sizes":[]}}"="" data-widget_type="button.default">
 				<div class="elementor-widget-container">
 									<div class="elementor-button-wrapper">
 					<a class="elementor-button elementor-button-link elementor-size-sm" href="#oferta">
