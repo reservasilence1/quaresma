@@ -257,7 +257,19 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 					}
 				}
 			</style>
-			<meta name="redi-version" content="1.2.7">	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"></head>
+			<meta name="redi-version" content="1.2.7">	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+
+<style>
+  /* Segurança: em HTML estático, evita elementos invisíveis do Elementor */
+  .elementor-invisible { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+  /* Segurança: evita overflow esquisito do swiper */
+  .elementor-image-carousel-wrapper { overflow: hidden; }
+</style>
+
+
+
+</head>
 <body class="wp-singular page-template page-template-elementor_canvas page page-id-7430 wp-embed-responsive wp-theme-hello-elementor unselectable eio-default hello-elementor-default elementor-default elementor-template-canvas elementor-kit-39 elementor-page elementor-page-7430">
 			<div data-elementor-type="wp-page" data-elementor-id="7430" class="elementor elementor-7430" data-elementor-post-type="page">
 				<div class="elementor-element elementor-element-34cbe867 e-flex e-con-boxed e-con e-parent" data-id="34cbe867" data-element_type="container" data-e-type="container" data-settings="{" background_background":"classic"}"="">
