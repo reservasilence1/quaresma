@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Diário do Itinerário Quaresmal 2026 – Editora Católica</title>
+  <meta name="description" content="Diário espiritual em PDF, organizado dia a dia, com orientações simples para viver a Quaresma até a Páscoa.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#ffffff;
+      --ink:#141414;
+      --muted:#5a5a5a;
+      --card:#ffffff;
+      --border:rgba(0,0,0,.08);
+      --shadow:0 16px 40px rgba(0,0,0,.10);
+      --accent:#6a5565;
+      --accent2:#4f3e4b;
+      --cta:#111;
+      --ctaText:#fff;
+      --ok:#11F849;
+      --radius:18px;
+      --max:980px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 18px}
+    .section{padding:34px 0}
+    .hero{padding:26px 0 18px}
+    .heroCard{
+      border:1px solid var(--border);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      background:linear-gradient(180deg, #fff, #fbfbfb);
+    }
+    .heroImg{width:100%; display:block}
+    .heroBody{padding:18px 18px 22px}
+    h1,h2,h3{margin:0 0 10px}
+    h1{font-size:30px; line-height:1.15; letter-spacing:-.02em}
+    h2{font-size:26px; line-height:1.18; letter-spacing:-.02em}
+    p{margin:0 0 12px; color:var(--muted); line-height:1.6}
+    .center{text-align:center}
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      font-weight:600; font-size:13px;
+      padding:8px 12px; border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      margin-bottom:12px;
+    }
+    .pill b{color:var(--accent2)}
+    .ctaRow{display:flex; flex-direction:column; gap:10px; align-items:center; margin-top:14px}
+    .btn{
+      appearance:none; border:0; cursor:pointer;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:14px 18px;
+      border-radius:14px;
+      background:var(--cta);
+      color:var(--ctaText);
+      font-weight:800;
+      text-decoration:none;
+      width:min(560px, 100%);
+      box-shadow:0 14px 28px rgba(0,0,0,.18);
+      transform:translateZ(0);
+      transition:transform .15s ease, box-shadow .15s ease, opacity .15s ease;
+    }
+    .btn:hover{transform:translateY(-1px); box-shadow:0 18px 34px rgba(0,0,0,.22)}
+    .btn:active{transform:translateY(0px); opacity:.92}
+    .subNote{font-size:14px; color:var(--muted); text-align:center}
+    .subNote img{width:17px; vertical-align:middle}
+    .grid3{
+      display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin-top:18px
+    }
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:0 10px 22px rgba(0,0,0,.06);
+      padding:16px;
+    }
+    .card h3{font-size:16px; margin:0 0 6px}
+    .card p{margin:0; font-size:14px}
+    .iconRow{display:flex; align-items:flex-start; gap:12px}
+    .iconRow img{width:46px; height:46px; border-radius:14px; object-fit:cover}
+
+    .sampleShell{
+      background:linear-gradient(180deg, var(--accent) 0%, #594451 100%);
+      padding:34px 0;
+      color:#fff;
+    }
+    .sampleShell h2{color:#fff; text-align:center; font-size:34px}
+    .carousel{
+      margin-top:18px;
+      display:flex;
+      gap:16px;
+      overflow:auto;
+      padding:14px 4px 16px;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+    }
+    .slide{
+      flex:0 0 auto;
+      width:min(240px, 72vw);
+      background:#fff;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.20);
+      box-shadow:0 16px 38px rgba(0,0,0,.20);
+      scroll-snap-align:center;
+      overflow:hidden;
+    }
+    .slide img{width:100%; height:auto; display:block}
+    .carousel::-webkit-scrollbar{height:10px}
+    .carousel::-webkit-scrollbar-thumb{background:rgba(255,255,255,.25); border-radius:999px}
+    .carousel::-webkit-scrollbar-track{background:rgba(0,0,0,.12); border-radius:999px}
+
+    .carouselControls{display:flex; gap:10px; justify-content:center; margin-top:10px}
+    .miniBtn{
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.14);
+      color:#fff;
+      padding:8px 12px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .miniBtn:hover{background:rgba(255,255,255,.20)}
+
+    .list{list-style:none; padding:0; margin:10px 0 0; display:flex; flex-direction:column; gap:10px}
+    .li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding:12px 12px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
+    .li svg{flex:0 0 auto; margin-top:2px}
+    .li span{color:#222; font-weight:600}
+    .li small{display:block; color:var(--muted); font-weight:500; margin-top:4px}
+
+    .offer{
+      border-radius:22px;
+      border:1px solid var(--border);
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      background:#fff;
+    }
+    .offerHead{
+      padding:18px;
+      background:linear-gradient(180deg, #fff, #fafafa);
+      border-bottom:1px solid var(--border);
+    }
+    .priceRow{display:flex; flex-wrap:wrap; gap:12px; align-items:baseline; justify-content:center; margin-top:10px}
+    .price{font-size:38px; font-weight:900; letter-spacing:-.02em; color:#111;}
+    .price small{font-size:14px; color:var(--muted); font-weight:700}
+    .badge{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#f4f4f4;
+      border:1px solid var(--border);
+      font-weight:800;
+      color:#111;
+      font-size:13px;
+    }
+
+    .faq details{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:12px 14px;
+      background:#fff;
+    }
+    .faq details + details{margin-top:10px}
+    .faq summary{cursor:pointer; font-weight:800; color:#222; list-style:none}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq p{margin-top:8px; color:var(--muted)}
+
+    footer{padding:26px 0 40px; border-top:1px solid var(--border); color:var(--muted); font-size:13px}
+
+    #toast-compras{
+      position:fixed; right:18px; bottom:18px; z-index:1000;
+      background:#fff; padding:10px 14px; display:flex; align-items:center; justify-content:center;
+      gap:14px; border-radius:14px; box-shadow:0 16px 38px rgba(0,0,0,.18);
+      transform:translateY(calc(100% + 40px)); transition:all .25s ease; opacity:0;
+      max-width:min(420px, calc(100vw - 36px));
+    }
+    #toast-compras.show{transform:none; opacity:1}
+    #toast-compras *{font-family:Inter, sans-serif}
+    #toast-compras svg{
+      width:36px; height:36px; fill:var(--ok); border:3px solid var(--ok);
+      padding:5px; border-radius:999px
+    }
+    #toast-compras .linha-1{display:flex; gap:12px; align-items:center; margin:0 0 4px}
+    #toast-compras .nome{font-size:14px; font-weight:800; line-height:14px; color:#1b1b1b; margin:0}
+    #toast-compras .tempo{font-size:12px; font-weight:600; line-height:12px; color:#7a7a7a; margin:0}
+    #toast-compras .linha-2{font-size:13px; font-weight:600; line-height:1.3; color:#1b1b1b; margin:0}
+    #toast-compras .linha-2 b{color:#111}
+    #toast-close{
+      border:0; background:transparent; cursor:pointer;
+      font-size:18px; line-height:18px; color:#888; padding:6px; border-radius:10px;
+    }
+    #toast-close:hover{background:#f2f2f2}
+
+    @media (max-width: 860px){
+      .grid3{grid-template-columns:1fr}
+      h1{font-size:26px}
+      h2{font-size:22px}
+      .sampleShell h2{font-size:28px}
+      .price{font-size:34px}
+    }
+  </style>
+</head>
+
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <div class="heroCard">
+        <img class="heroImg" src="/images/super-oferta-quaresma.png" alt="Super Oferta Quaresma">
+        <div class="heroBody center">
+          <div class="pill">🔥 <b>Ainda hoje</b> você garante um caminho claro para viver toda a Quaresma.</div>
+          <h1>Ainda hoje, você garante um caminho claro para viver toda a Quaresma.</h1>
+          <div class="ctaRow">
+            <a class="btn" href="#oferta" aria-label="Ir para a oferta">SIM, QUERO GARANTIR O MATERIAL</a>
+            <div class="subNote">
+              Você recebe tudo na hora, direto no seu
+              <img src="/images/733585.png" alt="WhatsApp"> WhatsApp e no seu
+              <img src="/images/732200.png" alt="E-mail"> e-mail.
+            </div>
+          </div>
+
+          <div class="grid3">
+            <div class="card">
+              <div class="iconRow">
+                <img src="/images/jesus.png" alt="Ícone">
+                <div>
+                  <h3>Para chegar à Páscoa em paz!</h3>
+                  <p>Com a certeza de que viveu a Quaresma como deveria.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="iconRow">
+                <img src="/images/jesus.png" alt="Ícone">
+                <div>
+                  <h3>Ritmo real, sem peso</h3>
+                  <p>Orientações simples e possíveis de seguir no dia a dia.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="iconRow">
+                <img src="/images/jesus.png" alt="Ícone">
+                <div>
+                  <h3>Dia a dia bem guiado</h3>
+                  <p>O que rezar e como viver cada dia, até a Páscoa.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="sampleShell" id="amostra">
+    <div class="wrap">
+      <h2>Veja uma pequena amostra do<br>material que você vai receber:</h2>
+
+      <div class="carousel" id="amostra-carousel" aria-label="Carrossel de amostras">
+        <div class="slide"><img src="/images/01.PNG" alt="Amostra 1" loading="lazy"></div>
+        <div class="slide"><img src="/images/02.PNG" alt="Amostra 2" loading="lazy"></div>
+        <div class="slide"><img src="/images/03.PNG" alt="Amostra 3" loading="lazy"></div>
+        <div class="slide"><img src="/images/04.PNG" alt="Amostra 4" loading="lazy"></div>
+        <div class="slide"><img src="/images/05.PNG" alt="Amostra 5" loading="lazy"></div>
+        <div class="slide"><img src="/images/06.PNG" alt="Amostra 6" loading="lazy"></div>
+      </div>
+
+      <div class="carouselControls">
+        <button class="miniBtn" type="button" data-dir="-1">◀</button>
+        <button class="miniBtn" type="button" data-dir="1">▶</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 class="center">O que você recebe</h2>
+      <p class="center">Nosso material irá te ajudar a viver a Quaresma com mais sentido, constância e paz.</p>
+
+      <ul class="list">
+        <li class="li">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.998 9.997 26.207 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" fill="#11F849"/></svg>
+          <div>
+            <span>Diário do Itinerário Quaresmal 2026 + 6 SUPER BÔNUS</span>
+            <small>PDF digital (pronto para imprimir ou ler no celular).</small>
+          </div>
+        </li>
+        <li class="li">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.998 9.997 26.207 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" fill="#11F849"/></svg>
+          <div>
+            <span>Orientações simples para a rotina real</span>
+            <small>Sem exigir “tempo perfeito” — pensado para o seu dia a dia.</small>
+          </div>
+        </li>
+        <li class="li">
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 512 512"><path d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.998 9.997 26.207 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z" fill="#11F849"/></svg>
+          <div>
+            <span>Entrega imediata no WhatsApp e no e-mail</span>
+            <small>Você recebe na hora após a confirmação.</small>
+          </div>
+        </li>
+      </ul>
+
+      <div class="center" style="margin-top:18px">
+        <a class="btn" href="#oferta">SIM, QUERO GARANTIR O MATERIAL</a>
+        <div class="subNote" style="margin-top:10px">
+          Você recebe tudo na hora, direto no seu
+          <img src="/images/733585.png" alt="WhatsApp"> WhatsApp e no seu
+          <img src="/images/732200.png" alt="E-mail"> e-mail.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="duvidas">
+    <div class="wrap">
+      <h2 class="center">Dúvidas frequentes</h2>
+
+      <div class="faq" style="margin-top:14px">
+        <details open>
+          <summary>O que é o Diário do Itinerário Quaresmal 2026?</summary>
+          <p>É um diário espiritual em PDF, organizado dia a dia, que mostra o que rezar e como viver cada dia da Quaresma até a Páscoa.</p>
+        </details>
+        <details>
+          <summary>Preciso ter muito tempo para usar o Itinerário?</summary>
+          <p>Não. O material foi pensado para a rotina real, com orientações simples e possíveis de seguir no dia a dia.</p>
+        </details>
+        <details>
+          <summary>O pagamento é seguro?</summary>
+          <p>Sim! O pagamento é processado por <b>plataformas 100% seguras</b>, garantindo proteção total dos seus dados.</p>
+        </details>
+      </div>
+
+      <div class="center" style="margin-top:18px">
+        <p><strong>Tirou suas dúvidas?</strong> Agora é só garantir o seu material!<br>Clique no botão abaixo 👇</p>
+        <a class="btn" href="#oferta">SIM, QUERO GARANTIR O MATERIAL</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="oferta">
+    <div class="wrap">
+      <div class="offer">
+        <div class="offerHead center">
+          <div class="badge">✅ Acesso imediato • PDF + Bônus</div>
+          <h2 style="margin-top:10px">Garanta agora o seu material</h2>
+          <p style="max-width:740px; margin:0 auto">Troque o link do checkout no botão abaixo (procure por <b>https://exemplo.com/checkout</b> no HTML).</p>
+
+          <div class="priceRow">
+            <div class="price">R$ 19,90 <small>à vista no Pix</small></div>
+          </div>
+
+          <div style="margin-top:14px">
+            <a class="btn" href="https://exemplo.com/checkout" target="_blank" rel="noopener">IR PARA O PAGAMENTO</a>
+            <div class="subNote" style="margin-top:10px">Entrega imediata após confirmação.</div>
+          </div>
+        </div>
+
+        <div class="wrap" style="padding:0 18px 18px">
+          <div class="card" style="margin-top:16px">
+            <img src="/images/Satisfacao-Garantida-1.png" alt="Satisfação Garantida" style="width:100%; height:auto; display:block">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap center">
+      <p style="max-width:860px; margin:0 auto 10px">
+        Qualquer cópia ou redistribuição sem autorização resultará em ações judiciais, multas e sanções penais.
+        <strong>Plágio é crime e será punido conforme a lei.</strong>
+      </p>
+      <p style="margin:0">© 2026 Editora Caminho do Saber LTDA. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <div id="toast-compras" aria-live="polite" aria-atomic="true">
+    <svg aria-hidden="true" viewBox="0 0 512 512"><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm-28.3 362.8L114.5 257.7c-6.2-6.2-6.2-16.4 0-22.6l22.6-22.6c6.2-6.2 16.4-6.2 22.6 0l67.4 67.4 140.2-140.2c6.2-6.2 16.4-6.2 22.6 0l22.6 22.6c6.2 6.2 6.2 16.4 0 22.6L250.3 370.8c-6.3 6.2-16.4 6.2-22.6 0z"></path></svg>
+    <div class="textos">
+      <div class="linha-1">
+        <p class="nome" id="toast-nome">—</p>
+        <p class="tempo" id="toast-tempo">—</p>
+      </div>
+      <p class="linha-2" id="toast-linha2">—</p>
+    </div>
+    <button id="toast-close" aria-label="Fechar">×</button>
+  </div>
+
+  <script>
+    (function(){
+      const track = document.getElementById('amostra-carousel');
+      if(!track) return;
+
+      const slideWidth = () => {
+        const first = track.querySelector('.slide');
+        return first ? (first.getBoundingClientRect().width + 16) : 260;
+      };
+
+      document.querySelectorAll('.miniBtn').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const dir = Number(btn.dataset.dir || 1);
+          track.scrollBy({ left: dir * slideWidth(), behavior:'smooth' });
+        });
+      });
+
+      let auto = null;
+      const start = ()=>{
+        stop();
+        auto = setInterval(()=>{
+          const max = track.scrollWidth - track.clientWidth - 4;
+          if(track.scrollLeft >= max){
+            track.scrollTo({left:0, behavior:'smooth'});
+          }else{
+            track.scrollBy({left: slideWidth(), behavior:'smooth'});
+          }
+        }, 2200);
+      };
+      const stop = ()=>{ if(auto) clearInterval(auto); auto=null; };
+      track.addEventListener('mouseenter', stop);
+      track.addEventListener('mouseleave', start);
+      track.addEventListener('touchstart', stop, {passive:true});
+      track.addEventListener('touchend', start, {passive:true});
+      start();
+    })();
+
+    (function(){
+      const compras = [
+        { nome: "Maria do Carmo", tempo: "46 minutos", pagamento: "Pix" },
+        { nome: "Aparecida Silveira", tempo: "22 minutos", pagamento: "Pix" },
+        { nome: "Lourdes Cavalcante", tempo: "32 minutos", pagamento: "cartão de crédito" },
+        { nome: "Francisca R.", tempo: "12 minutos", pagamento: "Pix" },
+        { nome: "Dona Antônia F.", tempo: "51 minutos", pagamento: "Pix" },
+        { nome: "Benedita D.", tempo: "37 minutos", pagamento: "Pix" },
+        { nome: "Sra. Terezinha M.", tempo: "5 minutos", pagamento: "cartão de crédito" },
+        { nome: "Conceição Santos", tempo: "32 minutos", pagamento: "Pix" }
+      ];
+
+      const toast = document.getElementById('toast-compras');
+      const nomeEl = document.getElementById('toast-nome');
+      const tempoEl = document.getElementById('toast-tempo');
+      const linha2El = document.getElementById('toast-linha2');
+      const close = document.getElementById('toast-close');
+      if(!toast || !nomeEl || !tempoEl || !linha2El) return;
+
+      let idx = 0;
+      let hideTimer = null;
+      const showToast = () => {
+        const c = compras[idx % compras.length];
+        idx++;
+        nomeEl.textContent = c.nome;
+        tempoEl.textContent = c.tempo;
+        linha2El.innerHTML = `Comprou agora via <b>${c.pagamento}</b>.`;
+        toast.classList.add('show');
+
+        clearTimeout(hideTimer);
+        hideTimer = setTimeout(()=> toast.classList.remove('show'), 4200);
+      };
+
+      close.addEventListener('click', ()=> toast.classList.remove('show'));
+
+      setTimeout(()=>{
+        showToast();
+        setInterval(showToast, 9500);
+      }, 5000);
+    })();
+  </script>
+</body>
+</html>
